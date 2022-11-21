@@ -18,7 +18,7 @@ function PropertyCard({ property }) {
       </div>
       <div className="property__card--details">
         <h2 className="property-heading">{property.title}</h2>
-        <h2 className="property-price-heading">&#x20A6;{property.price}</h2>
+        <h2 className="property-price-heading">${property.price}</h2>
         <div className="property__card--smalldeets">
           <div className="smalldeets-left">
             <div className="smalldeets__icon small-margin-right">

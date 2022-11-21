@@ -1,13 +1,12 @@
 import React, { lazy, Suspense, useState, useEffect } from "react";
 import CustomLoader from "../../components/CustomLoader/index";
 
-const ForIkamet = lazy(() => import("./index"));
+const PermanentResidency = lazy(() => import("./index"));
 
-function ForIkametIndex() {
+function PermanentResidencyIndex() {
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
-    setLoading(true);
+    setLoading(false) /* true */;
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -15,10 +14,10 @@ function ForIkametIndex() {
   return (
     <>
       <Suspense fallback={<CustomLoader loading={loading} />}>
-        <ForIkamet />
+        <PermanentResidency />
       </Suspense>
     </>
   );
 }
 
-export default ForIkametIndex;
+export default PermanentResidencyIndex;

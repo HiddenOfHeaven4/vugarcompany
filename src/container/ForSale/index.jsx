@@ -6,6 +6,7 @@ import {
   orderBy,
   limit,
   startAfter,
+  documentId,
 } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import PropertyCard from "../../components/Property/PropertyCard";
@@ -22,7 +23,7 @@ const ForSale = () => {
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(false) /* true */;
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -34,7 +35,7 @@ const ForSale = () => {
     const q = query(
       saleCollectionRef,
       where("category", "==", "Sale"),
-      orderBy("id", "asc"),
+      orderBy(documentId(), "asc"),
       limit(9)
     );
 
@@ -55,13 +56,13 @@ const ForSale = () => {
   }, []);
 
   const fetchMore = () => {
-    setLoading(true);
+    setLoading(false) /* true */;
     const saleCollectionRef = collection(db, "properties");
 
     const q = query(
       saleCollectionRef,
       where("category", "==", "Sale"),
-      orderBy("id", "asc"),
+      orderBy(documentId(), "asc"),
       startAfter(lastDoc),
       limit(6)
     );

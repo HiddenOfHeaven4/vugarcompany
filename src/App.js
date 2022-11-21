@@ -14,9 +14,10 @@ import NewProperty from "./container/Admin/NewProperty";
 import EditProperty from "./container/Admin/EditProperty";
 import PropertyDetails from "./container/PropertyDetail/index";
 import PropertyList from "./container/Admin/PropertyList";
-import ForIkamet from "./container/ForRent/ForRentIndex";
+import PermanentResidency from "./container/PermanentResidency/PermanentResidencyIndex";
+import AdminPermanentResidency from "./container/Admin/AdminPermanentResidency";
 import Scrolltotop from "./components/Scroll-to-top/index";
-import CustomCursor from "./components/CustomCursor/index";
+// import CustomCursor from "./components/CustomCursor/index";
 import { ScrollFromBottom } from "./components/Scroll-to-top/ScrollFromBottom";
 
 function App() {
@@ -35,16 +36,17 @@ function App() {
     <div className="App">
       <Router>
         <Scrolltotop />
-        <CustomCursor />
+        {/* <CustomCur  sor /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/properties" element={<Properties />} />
           <Route exact path="/properties/:id" element={<PropertyDetails />} />
           <Route exact path="/for-luxury" element={<ForLuxury />} />
-          <Route exact path="/for-ikamet" element={<ForIkamet />} />
+          <Route exact path="/permanent-residency/:id" element={<PermanentResidency />} />
           <Route exact path="/admin/register" element={<AdminRegister />} />
           <Route exact path="/admin/login" element={<AdminLogin />} />
           <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route exact path="/admin/permanent-residency/:id" element={<AdminPermanentResidency />} />
           <Route exact path="/admin/property/new" element={<NewProperty />} />
           <Route
             exact

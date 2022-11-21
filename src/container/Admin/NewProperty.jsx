@@ -17,6 +17,7 @@ import { BiArea } from "react-icons/bi";
 import { FaBed } from "react-icons/fa";
 import { FaShower } from "react-icons/fa";
 import CustomLoader from "../../components/CustomLoader/index";
+import { useSelector } from "react-redux";
 
 const NewProperty = () => {
   const navigate = useNavigate();
@@ -39,8 +40,13 @@ const NewProperty = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const { currentUser } = useSelector((state) => state.user);
+
   useEffect(() => {
-    setLoading(true);
+    if (!currentUser) {
+      navigate("/");
+    }
+    setLoading(false) /* true */;
     setTimeout(() => {
       setLoading(false);
     }, 2000);

@@ -5,6 +5,7 @@ import {
   orderBy,
   limit,
   startAfter,
+  documentId,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../utils/firebase-config";
@@ -22,7 +23,7 @@ const Properties = () => {
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(false) /* true */;
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -31,10 +32,14 @@ const Properties = () => {
   useEffect(() => {
     const propertyCollectionRef = collection(db, "properties");
 
-    const q = query(propertyCollectionRef, orderBy("id", "asc"), limit(9));
+    const q = query(propertyCollectionRef, orderBy(documentId(), "asc"), limit(9));
 
     const getProperties = async () => {
       const data = await getDocs(q);
+
+      console.log(data);
+      console.log(data.docs);
+      // console.log(data.docs());
 
       const isCollectionEmpty = data.size === 0;
       if (!isCollectionEmpty) {
@@ -50,12 +55,12 @@ const Properties = () => {
   }, []);
 
   const fetchMore = () => {
-    setLoading(true);
+    setLoading(false) /* true */;
     const propertyCollectionRef = collection(db, "properties");
 
     const q = query(
       propertyCollectionRef,
-      orderBy("id", "asc"),
+      orderBy(documentId(), "asc"),
       startAfter(lastDoc),
       limit(6)
     );

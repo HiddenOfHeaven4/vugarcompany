@@ -7,7 +7,7 @@ function ForLuxuryIndex() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(false) /* true */;
     setTimeout(() => {
       setLoading(false);
     }, 2000);

@@ -19,7 +19,7 @@ function PropertyDetails() {
   // const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
-  //   setLoading(true);
+  //   setLoading(false) /* true */;
   //   setTimeout(() => {
   //     setLoading(false);
   //   }, 2000);
@@ -59,7 +59,7 @@ function PropertyDetails() {
                     </div>
                   </div>
                   <h2 className="property-price-heading">
-                    &#x20A6; {property.price}
+                    $ {property.price}
                   </h2>
                   <div className="details__icons">
                     <div className="details__icons--box">

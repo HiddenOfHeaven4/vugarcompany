@@ -63,6 +63,8 @@ export const registerInitiate =
         password
       ).then(({ user }) => {
         dispatch(registerSuccess({ user, additionalData: { displayName } }));
+      }).catch((err) => {
+        console.log(err);
       });
     } catch (error) {
       dispatch(registerError(error.message));
@@ -84,11 +86,15 @@ export const loginInitiate = (email, password) => async (dispatch) => {
 };
 
 export const logoutInitiate = () => async (dispatch) => {
-  try {
+  // try {
     dispatch(logoutStart());
 
-    const user = await signOut().then((resp) => dispatch(logoutSuccess()));
-  } catch (error) {
-    dispatch(logoutError(error.message));
-  }
+    console.log(signOut)
+    
+    const user = await signOut(auth)
+      .then((resp) => dispatch(logoutSuccess()))
+      .catch(err => console.log(err));
+  // } catch (error) {
+  //   dispatch(logoutError(error.message));
+  // }
 };

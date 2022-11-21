@@ -8,6 +8,8 @@ import Sidebar from "./Sidebar";
 import { useParams } from "react-router-dom";
 import CustomLoader from "../../components/CustomLoader";
 import MetaTag from "../../components/MetaTag/MetaTag";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const PropertyList = () => {
   const { id } = useParams();
@@ -16,14 +18,20 @@ const PropertyList = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setLoading(true);
+    setLoading(false) /* true */;
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   }, []);
 
   useEffect(() => {
+    if (!currentUser) {
+      navigate("/");
+    }
     const getProperties = async () => {
       const data = await getDocs(propertyCollectionRef);
 
