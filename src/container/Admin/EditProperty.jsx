@@ -1,15 +1,15 @@
-import { doc, updateDoc } from "firebase/firestore";
-import React, { useState, useEffect } from "react";
-import { db } from "../../utils/firebase-config";
-import { useNavigate } from "react-router-dom";
+import { collection, doc, updateDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { BiCategory } from "react-icons/bi";
-import { ImPriceTags } from "react-icons/im";
 import { GrStatusGood } from "react-icons/gr";
-import { useParams } from "react-router-dom";
-import MetaTag from "../../components/MetaTag/MetaTag";
-import Sidebar from "./Sidebar";
-import "./admin.css";
+import { ImPriceTags } from "react-icons/im";
+import { useNavigate, useParams } from "react-router-dom";
 import CustomLoader from "../../components/CustomLoader/index";
+import MetaTag from "../../components/MetaTag/MetaTag";
+import Navbar from "../../components/Navigation/Navbar";
+import { db } from "../../utils/firebase-config";
+import "./admin.css";
+import Sidebar from "./Sidebar";
 
 const EditProperty = () => {
   const { id } = useParams();
@@ -17,10 +17,10 @@ const EditProperty = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    // setLoading(false) /* true */;
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 2000);
   }, []);
 
   const [category, setCategory] = useState("");
@@ -30,16 +30,16 @@ const EditProperty = () => {
   const categories = ["Buy", "Rent", "Sale"];
   const statusList = ["Hot", "Featured", "Active"];
 
-  const updateProperty = async () => {
-    // e.preventDefault();
+  const updateProperty = async (event) => {
+    event.preventDefault();
     const propertyDoc = doc(db, "properties", id);
     const newFields = {
-      setCategory,
-      setPrice,
-      setStatus,
+      category: category,
+      price: price,
+      status: status,
     };
     await updateDoc(propertyDoc, newFields);
-    navigate("/");
+    // navigate("/");
   };
 
   return (
@@ -49,12 +49,13 @@ const EditProperty = () => {
       ) : (
         <>
           <MetaTag title="Рабочая панель - Изменение объекта" />
+          <Navbar />
           <div className="admin__dashboard">
             <Sidebar />
 
             <div className="admin__dashboard--details">
               <div className="update__property">
-                <form className="create__property--form">
+                <form onSubmit={updateProperty} className="create__property--form">
                   <div className="admin__input--wrapper">
                     <h2 className="heading-secondary ">Категория</h2>
                     <div className="admin__input--container">
@@ -113,7 +114,6 @@ const EditProperty = () => {
                   <button
                     className="btn-width"
                     type="submit"
-                    onClick={updateProperty}
                   >
                     Добавить
                   </button>

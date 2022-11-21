@@ -267,6 +267,19 @@
   text-align: center;
 }
 
+img.admin__image {
+  width: 100px;
+  margin-left: 20px;
+}
+
+textarea#content {
+  width: 100%;
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 5px 10px -2px #0002;
+}
+
 @media screen and (max-width: 680px) {
   .admin__dashboard--details {
     flex: 1;

@@ -24,7 +24,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(false) /* true */;
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -139,7 +139,7 @@ const Home = () => {
                   Необходимые документы для оформления ВНЖ 😊
                 </h2>
                 <div className="hide-on-mobile">
-                  <Link to="/for-ikamet">
+                  <Link to="/permanent-residency/ikamet">
                     <ButtonArrow title="Ознакомиться" />
                   </Link>
                 </div>
@@ -153,7 +153,7 @@ const Home = () => {
                     ))}
               </div>
               <div className="hide-on-laptop">
-                <Link to="/for-ikamet">
+                <Link to="/permanent-residency/ikamet">
                   <ButtonArrow title="Ознакомиться" />
                 </Link>
               </div>

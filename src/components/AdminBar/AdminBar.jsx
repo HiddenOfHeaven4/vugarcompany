@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
-import "./Navbar.css";
-import { useSelector } from "react-redux";
+import "./AdminBar.css";
 
-
-const Navbar = () => {
+const AdminBar = () => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -19,8 +17,6 @@ const Navbar = () => {
     }
   };
 
-  const { currentUser } = useSelector((state) => state.user);
-
   window.addEventListener("scroll", changeColor);
 
   return (
@@ -32,20 +28,8 @@ const Navbar = () => {
       </div>
 
       <ul className={click ? "nav-menu active" : "nav-menu"}>
-        {currentUser && (<li>
-          <Link to="/admin/dashboard">Панель админа</Link>
-        </li>)}
         <li>
-          <Link to="/">Главная страница</Link>
-        </li>
-        <li>
-          <Link to="/properties">Каталог жилья</Link>
-        </li>
-        <li>
-          <Link to="/for-luxury">Каталог жилья премиум класса</Link>
-        </li>
-        <li>
-          <Link to="/permanent-residency/ikamet">Помощь с ВНЖ</Link>
+          <Link to="/admin/dashboard">Админ панель</Link>
         </li>
       </ul>
       <div className="hamburger" onClick={handleClick}>
@@ -59,4 +43,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminBar;

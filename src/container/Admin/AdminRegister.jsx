@@ -100,7 +100,7 @@ const AdminRegister = () => {
               value={password}
               required
             />
-            <button className="icon__container" onClick={toggleBtn}>
+            <button tabIndex="-1" className="icon__container" onClick={toggleBtn}>
               {revealPassword ? (
                 <AiOutlineEyeInvisible className="profile__icon" />
               ) : (
@@ -118,7 +118,7 @@ const AdminRegister = () => {
               value={passwordConfirm}
               required
             />
-            <button className="icon__container" onClick={toggleBtn2}>
+            <button tabIndex="-1" className="icon__container" onClick={toggleBtn2}>
               {revealPassword2 ? (
                 <AiOutlineEyeInvisible className="profile__icon" />
               ) : (

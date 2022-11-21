@@ -22,6 +22,7 @@ import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { SiApacheairflow } from "react-icons/si";
 import { GiAbstract050 } from "react-icons/gi";
 import "./Sidebar.css";
+import { BsPencilSquare } from "react-icons/bs";
 function Sidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,6 +53,14 @@ function Sidebar() {
                 Рабочая панель
                 <Link to="/admin/dashboard" />
               </MenuItem>
+            </Menu>
+            <Menu iconShape="circle">
+              <SubMenu title="ВНЖ" icon={<BsPencilSquare />}>
+                <MenuItem icon={<AiFillFolderAdd />}>
+                  Икамет
+                  <Link to="/admin/permanent-residency/ikamet" />
+                </MenuItem>
+              </SubMenu>
             </Menu>
             <Menu iconShape="circle">
               <SubMenu title="Объекты" icon={<ImPriceTags />}>
