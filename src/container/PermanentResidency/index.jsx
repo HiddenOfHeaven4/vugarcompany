@@ -1,5 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
-import ReactMarkdown from "https://esm.sh/react-markdown@7";
+import ReactMarkdown from "react-markdown";
 import "photoswipe/dist/photoswipe.css";
 import React, { useEffect, useState } from "react";
 import { Gallery, Item } from "react-photoswipe-gallery";
