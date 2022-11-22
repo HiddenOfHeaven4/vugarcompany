@@ -26,18 +26,28 @@ const EditProperty = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
   const [status, setStatus] = useState("");
+  const [recommended, setRecommended] = useState(true);
+  const [active, setActive] = useState(true);
 
   const categories = ["Buy", "Rent", "Sale"];
-  const statusList = ["Hot", "Featured", "Active"];
+  const statusList = [
+    "Быстрая продажа",
+    "Скоро будет доступно",
+    "Доступно к продаже",
+  ];
 
   const updateProperty = async (event) => {
     event.preventDefault();
     const propertyDoc = doc(db, "properties", id);
+    console.log(recommended, active);
     const newFields = {
       category: category,
       price: price,
       status: status,
+      recommended: recommended,
+      active: active
     };
+    console.log(newFields);
     await updateDoc(propertyDoc, newFields);
     // navigate("/");
   };
@@ -55,7 +65,10 @@ const EditProperty = () => {
 
             <div className="admin__dashboard--details">
               <div className="update__property">
-                <form onSubmit={updateProperty} className="create__property--form">
+                <form
+                  onSubmit={updateProperty}
+                  className="create__property--form"
+                >
                   <div className="admin__input--wrapper">
                     <h2 className="heading-secondary ">Категория</h2>
                     <div className="admin__input--container">
@@ -83,12 +96,35 @@ const EditProperty = () => {
                         type="number"
                         placeholder="Цена"
                         required
+                        value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         className="admin__input"
                       />
                       <span className="admin__icon--container">
                         <ImPriceTags className="admin__update--icon" />
                       </span>
+                    </div>
+                  </div>
+
+                  <div className="admin__input--wrapper">
+                    <h2 className="heading-secondary ">Рекомендован</h2>
+                    <div className="admin__input--container">
+                      <input
+                        value={recommended}
+                        onChange={(e) => setRecommended(e.target.checked)}
+                        type="checkbox"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="admin__input--wrapper">
+                    <h2 className="heading-secondary ">Доступное жильё</h2>
+                    <div className="admin__input--container">
+                      <input
+                        value={active}
+                        onChange={(e) => setActive(e.target.checked)}
+                        type="checkbox"
+                      />
                     </div>
                   </div>
 
@@ -111,10 +147,7 @@ const EditProperty = () => {
                       </span>
                     </div>
                   </div>
-                  <button
-                    className="btn-width"
-                    type="submit"
-                  >
+                  <button className="btn-width" type="submit">
                     Добавить
                   </button>
                 </form>

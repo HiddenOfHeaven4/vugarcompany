@@ -42,9 +42,6 @@ const Navbar = () => {
           <Link to="/properties">Каталог жилья</Link>
         </li>
         <li>
-          <Link to="/for-luxury">Каталог жилья премиум класса</Link>
-        </li>
-        <li>
           <Link to="/permanent-residency/ikamet">Помощь с ВНЖ</Link>
         </li>
       </ul>

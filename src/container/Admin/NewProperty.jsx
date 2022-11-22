@@ -33,6 +33,8 @@ const NewProperty = () => {
   const [longitude, setLongitude] = useState(0);
   const [latitude, setLatitude] = useState(0);
   const [area, setArea] = useState(0);
+  const [recommended, setRecommended] = useState(false);
+  const [active, setActive] = useState(true);
   const [status, setStatus] = useState("");
 
   const categories = ["Люкс", "Премиум", "Рабочий класс"];
@@ -69,6 +71,8 @@ const NewProperty = () => {
       latitude: Number(latitude),
       area: Number(area),
       status,
+      recommended,
+      active,
       createdAt: new Date(),
     })
       .then(() => {
@@ -159,6 +163,28 @@ const NewProperty = () => {
                     <span className="admin__icon--container">
                       <GoLocation className="admin__update--icon" />
                     </span>
+                  </div>
+                </div>
+
+                <div className="admin__input--wrapper">
+                  <h2 className="heading-secondary ">Рекомендован</h2>
+                  <div className="admin__input--container">
+                    <input
+                      value={recommended}
+                      onChange={(e) => setRecommended(e.target.value)}
+                      type="checkbox"
+                    />
+                  </div>
+                </div>
+
+                <div className="admin__input--wrapper">
+                  <h2 className="heading-secondary ">Доступное жильё</h2>
+                  <div className="admin__input--container">
+                    <input
+                      value={active}
+                      onChange={(e) => setActive(e.target.value)}
+                      type="checkbox"
+                    />
                   </div>
                 </div>
 

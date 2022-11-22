@@ -34,7 +34,7 @@ const ForSale = () => {
 
     const q = query(
       saleCollectionRef,
-      where("category", "==", "Sale"),
+      where("recommended", "==", true),
       orderBy(documentId(), "asc"),
       limit(9)
     );
@@ -61,10 +61,10 @@ const ForSale = () => {
 
     const q = query(
       saleCollectionRef,
-      where("category", "==", "Sale"),
+      where("recommended", "==", true),
       orderBy(documentId(), "asc"),
       startAfter(lastDoc),
-      limit(6)
+      limit(9)
     );
 
     const getSale = async () => {

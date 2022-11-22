@@ -3,7 +3,7 @@ import Grid3x3 from "../../components/Grids/Grid3x3";
 import Testimonial from "../../components/Testimonial/Testimonial";
 import Footer from "../../components/Footer/Footer";
 import { db } from "../../utils/firebase-config";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import PropertyCard from "../../components/Property/PropertyCard";
 import "./index.css";
 import ButtonArrow from "../../components/Button/ButtonArrow";
@@ -18,8 +18,7 @@ import "../Properties/index.css";
 
 const Home = () => {
   const [forSale, setForSale] = useState([]);
-  const [forRent, setForRent] = useState([]);
-  const [forFeatured, setForFeatured] = useState([]);
+  const [recommendedProperties, setRecommendedProperties] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -33,40 +32,25 @@ const Home = () => {
   useEffect(() => {
     const saleCollectionRef = collection(db, "properties");
 
-    const q = query(saleCollectionRef, where("category", "==", "Sale"));
+    const q = query(saleCollectionRef, where("active", "==", true), limit(6));
 
-    const getSale = async () => {
+    (async () => {
       const data = await getDocs(q);
 
       setForSale(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getSale();
+    })();
   }, []);
 
   useEffect(() => {
-    const rentCollectionRef = collection(db, "properties");
+    const recommendedCollectionRef = collection(db, "properties");
 
-    const q = query(rentCollectionRef, where("category", "==", "Rent"));
+    const q = query(recommendedCollectionRef, where("recommended", "==", true), limit(6));
 
-    const getRent = async () => {
+    (async () => {
       const data = await getDocs(q);
 
-      setForRent(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getRent();
-  }, []);
-
-  useEffect(() => {
-    const statusCollectionRef = collection(db, "properties");
-
-    const q = query(statusCollectionRef, where("status", "==", "Featured"));
-
-    const getStatus = async () => {
-      const data = await getDocs(q);
-
-      setForFeatured(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getStatus();
+      setRecommendedProperties(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    })();
   }, []);
   return (
     <>
@@ -94,8 +78,8 @@ const Home = () => {
               </div>
 
               <div className="property__card--container">
-                {forFeatured &&
-                  forFeatured
+                {recommendedProperties &&
+                  recommendedProperties
                     .slice(0, 6)
                     .map((property) => (
                       <PropertyCard property={property} key={property.title} />
@@ -121,39 +105,12 @@ const Home = () => {
               <div className="property__card--container">
                 {forSale &&
                   forSale
-                    .slice(0, 6)
                     .map((property) => (
                       <PropertyCard property={property} key={property.title} />
                     ))}
               </div>
               <div className="hide-on-laptop">
                 <Link to="/for-luxury">
-                  <ButtonArrow title="Ознакомиться" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="for--section">
-              <div className="section-heading">
-                <h2 className="heading-secondary">
-                  Необходимые документы для оформления ВНЖ 😊
-                </h2>
-                <div className="hide-on-mobile">
-                  <Link to="/permanent-residency/ikamet">
-                    <ButtonArrow title="Ознакомиться" />
-                  </Link>
-                </div>
-              </div>
-              <div className="property__card--container">
-                {forRent &&
-                  forRent
-                    .slice(0, 6)
-                    .map((property) => (
-                      <PropertyCard property={property} key={property.title} />
-                    ))}
-              </div>
-              <div className="hide-on-laptop">
-                <Link to="/permanent-residency/ikamet">
                   <ButtonArrow title="Ознакомиться" />
                 </Link>
               </div>
