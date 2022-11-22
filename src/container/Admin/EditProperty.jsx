@@ -26,7 +26,7 @@ const EditProperty = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
   const [status, setStatus] = useState("");
-  const [recommended, setRecommended] = useState(true);
+  const [recommended, setRecommended] = useState(false);
   const [active, setActive] = useState(true);
 
   const categories = ["Buy", "Rent", "Sale"];
@@ -110,7 +110,7 @@ const EditProperty = () => {
                     <h2 className="heading-secondary ">Рекомендован</h2>
                     <div className="admin__input--container">
                       <input
-                        value={recommended}
+                        checked={recommended}
                         onChange={(e) => setRecommended(e.target.checked)}
                         type="checkbox"
                       />
@@ -121,7 +121,7 @@ const EditProperty = () => {
                     <h2 className="heading-secondary ">Доступное жильё</h2>
                     <div className="admin__input--container">
                       <input
-                        value={active}
+                        checked={active}
                         onChange={(e) => setActive(e.target.checked)}
                         type="checkbox"
                       />
